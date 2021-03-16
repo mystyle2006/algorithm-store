@@ -41,7 +41,6 @@ function solution(begin, target, words) {
         return;
       }
 
-      console.log(_begin, level, validWords, visited);
       validWords.forEach(vword => {
         dfs(vword, level + 1, [...visited, vword]);
       });
