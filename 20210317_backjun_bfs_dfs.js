@@ -1,5 +1,5 @@
 // https://www.acmicpc.net/problem/2178
-
+// 미로
 const dx = [1, -1,0, 0];
 const dy = [0, 0, 1, -1];
 
@@ -38,4 +38,4 @@ console.log(solution(4, 6, [
   [1,0,1,0,1,0],
   [1,0,1,0,1,1],
   [1,1,1,0,1,1],
-]))
+]));

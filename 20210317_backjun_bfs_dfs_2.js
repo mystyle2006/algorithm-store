@@ -1,3 +1,5 @@
+// https://www.acmicpc.net/problem/1303
+// 적군
 function solution(battle, X, Y) {
   const checked = Array.from(Array(X), () => Array.from(Array(Y), () => 0));
   let friendPower = 0;

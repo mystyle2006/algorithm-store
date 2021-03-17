@@ -1,5 +1,5 @@
 // https://www.acmicpc.net/problem/1260
-
+// 기본
 function solution(paths, N, V) {
   paths.sort();
   const visited = [];
