@@ -6,8 +6,23 @@
 // 출력: [1,4, 8, 6];
 
 function solution(paths) {
-  let list = new Array(10).fill(null);
-  console.log(list);
+  let answer = [];
+  let prev = null;
+  paths.forEach((path, index) => {
+    if (index === paths.length - 1) {
+      answer.push(path[1]);
+      return;
+    }
+    if (!prev) {
+      answer.push(path[0]);
+      prev = path[1];
+    } else if (prev !== path[0]) {
+      answer.push(prev);
+      prev = null;
+    }
+  });
+
+  return answer;
 }
 
 solution([[1,2], [2,3], [3, 4], [8, 7], [7, 6]]);
