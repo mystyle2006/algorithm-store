@@ -3,7 +3,7 @@ function solution(n, list) {
 
   for (let i = 0; i < n; i += 1) {
     for (let j = 0; j < i; j += 1) {
-      if (dp[j] > list[i]) continue;
+      if (list[j] > list[i]) continue;
       dp[i] = Math.max(dp[j] + list[i], dp[i]);
     }
   }
