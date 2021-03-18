@@ -1,3 +1,4 @@
+// https://www.acmicpc.net/problem/17406
 function solution(n, m, board, rotation) {
   let queue = [];
 
