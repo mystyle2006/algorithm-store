@@ -1,0 +1,83 @@
+// Dictionary
+const TYPE = {
+  cheese: 'cheese',
+  sweetPotato: 'sweetPotato',
+};
+
+const FLAVOR = {
+  mild: 0,
+  normal: 1,
+  hot: 2,
+};
+
+const SIDE = {
+  noodle: 'noodle',
+  dumpling: 'dumpling',
+};
+
+// Q)어떤 자료 구조/데이터 형식이 좋을까요? 이유는 무엇인가요?
+//
+// A) 각 케이스마다 현재 상태를 key/value 로 갖고 있고
+// 판매해야하는 음식의 상태를 O(1)로 가져올 수 있기 때문에 이 자료 구조가 좋을 것 같습니다.
+// 예) 치즈떡 - 매운맛 - 라면 사리 일 경우,
+// solution(TYPE.cheese, FLAVOR.hot, SIDE.noodle);
+// 했을 경우 원하는 데이터를 얻을 수 있다.
+
+// 해당 함수는 음식 종류, 맛, 사이드를 입력했을 때 주문이 가능한지 아닌지 판별하는 함수입니다.
+function solution(type, flavor, side) {
+  // 입력 값에 대한 예외처리
+  if (!type || !flavor || !side) {
+    return {
+      message: '위 항목부터 선택해주세요.',
+    }
+  }
+
+  // 사이드 메뉴에 대한 상태 저장
+  const sideStatus = {
+    [SIDE.noodle]: {
+      count: 0,
+    },
+    [SIDE.dumpling]: {
+      count: 0,
+    },
+  }
+
+  // 음식 메뉴에 대한 상태 저장
+  const foodStatus = {
+    [TYPE.cheese]: {
+      [FLAVOR.mild]: {
+        available: false,
+
+      },
+      [FLAVOR.normal]: {
+        available: false,
+
+      },
+      [FLAVOR.hot]: {
+        available: false,
+      },
+    },
+    [TYPE.sweetPotato]: {
+      [FLAVOR.mild]: {
+        available: false,
+
+      },
+      [FLAVOR.normal]: {
+        available: false,
+
+      },
+      [FLAVOR.hot]: {
+        available: false,
+      },
+    },
+  };
+
+  // available: 현재 이용 가능한지 아닌지
+  // side: 해당 주문에 대한 사이드 정보
+  return {
+    available: foodStatus[type][flavor].available,
+    side: sideStatus[side],
+  }
+}
+
+console.log(solution(TYPE.cheese, FLAVOR.hot, SIDE.noodle));

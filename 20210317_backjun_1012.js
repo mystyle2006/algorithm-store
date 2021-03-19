@@ -1,4 +1,4 @@
-// link : https://www.acmicpc.net/problem/17413
+// link : https://www.acmicpc.net/problem/1012
 
 function solution(M, N, cabbages) {
   const ground = Array.from(Array(M), () => Array.from(Array(N), () => 0));
