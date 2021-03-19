@@ -5,7 +5,7 @@ function solution(n, list) {
   for (let i = 0; i < n; i += 1) {
     dp[i] = 1;
     for (let j = 0; j < i; j += 1) {
-      if (list[j] > list[i] || dp[i] > dp[j] + 1) continue;
+      if (list[j] > list[i]) continue;
       dp[i] = dp[j] + 1;
     }
 
