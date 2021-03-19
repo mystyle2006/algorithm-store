@@ -7,7 +7,7 @@ function solution(n, m, a, b) {
     }
   }
 
-  let cnt = 1;
+  let cnt = 0;
   for (let i = 0; i <= n - 3; i += 1) {
     for (let j = 0; j <= m - 3; j += 1) {
       if (a[i][j] !== b[i][j]) {
@@ -17,9 +17,9 @@ function solution(n, m, a, b) {
     }
   }
 
-  let isEqual = false;
-  for (let i = 0; i <= n - 3; i += 1) {
-    for (let j = 0; j <= m - 3; j += 1) {
+  let isEqual = true;
+  for (let i = 0; i < n; i += 1) {
+    for (let j = 0; j < m; j += 1) {
       if (a[i][j] !== b[i][j]) isEqual = false;
     }
   }
