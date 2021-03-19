@@ -1,0 +1,22 @@
+{
+  "name": "al",
+  "version": "1.0.0",
+  "description": "",
+  "main": "20210316_dfs_target-number.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mystyle2006/algorithm-store.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mystyle2006/algorithm-store/issues"
+  },
+  "homepage": "https://github.com/mystyle2006/algorithm-store#readme",
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
+}
