@@ -1,25 +1,27 @@
 function solution(n) {
-  // dp [1 ~ 9] = 내림수
-  // dp [10 ~ 99] = 첫째자리가 둘쨰짜리보다 큰거
-  // dp [100 ~ i] = 첫째자리가 자릿수보다 크거나 같고 dp[둘째자리부터] true
-  let answer = 0;
+  let answer = 1;
 
-  const dp = Array.from(Array(Math.pow(10, n) + 1), () => false);
+  function check(num) {
+    let temp = -1;
 
-  dp[0] = true;
-
-  for (let i = 1; i <= Math.pow(10, n); i += 1) {
-    if (i <= 10) dp[i] = true;
-    else if (i <= 99) dp[i] = parseInt(`${i}`[0]) > parseInt(`${i}`[1]);
-    else {
-
+    while(num !== 0) {
+      const a = Math.floor(num / 10);
+      const b = num % 10;
+      if (temp >= b) return false;
+      temp = b;
+      num = a;
     }
+    return true;
   }
 
-  return dp.filter(i => i).length;
+  for (let i = 1; i <= Math.pow(10, n); i += 1) {
+    answer += check(i) ? 1 : 0;
+  }
+
+  return answer;
 }
 
-console.log(solution(2));
+console.log(solution(10));
 
 // 문제 설명
 // 문제
@@ -50,3 +52,6 @@ console.log(solution(2));
 // 1) 입력 : 0 -> 출력 : 1
 // 2) 입력 : 1 -> 출력 : 10
 // 3) 입력 : 2 -> 출력 : 55
+
+
+[6];
