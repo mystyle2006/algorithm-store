@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mystyle2006/algorithm-store#readme",
   "dependencies": {
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "readline": "^1.3.0"
   }
 }
