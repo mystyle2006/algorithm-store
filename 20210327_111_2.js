@@ -1,24 +1,31 @@
 function solution(n) {
-  let answer = 1;
+  if (n === 0) return 1;
+  // DP[i][j] : 자릿수가 i이고, 첫 글자가 j로 시작하는 내림수의 개수
+  // dp[i][j] = dp[i - 1][j - 1] ... dp[0][0]
 
-  function check(num) {
-    let temp = -1;
+  // dp[3][2] = dp[2][1] + dp[1][0]
+  const dp = Array.from(Array(n + 1), () => Array.from(Array(10), () => 0));
+  dp[0][0] = 1;
+  // 1자릿수 시작하는 내림수 하나
+  for (let i = 0; i <= 9; i += 1 ) {
+    dp[1][i] = 1;
+  }
 
-    while(num !== 0) {
-      const a = Math.floor(num / 10);
-      const b = num % 10;
-      if (temp >= b) return false;
-      temp = b;
-      num = a;
+  let i = 2;
+  while(i <= n) {
+    for (let j = 1; j <= 9; j += 1) {
+      for (let k = j - 1; k >= 0; k -= 1) {
+        dp[i][j] += dp[i - 1][k];
+      }
     }
-    return true;
+    i += 1;
   }
 
-  for (let i = 1; i <= Math.pow(10, n); i += 1) {
-    answer += check(i) ? 1 : 0;
-  }
-
-  return answer;
+  console.log(dp);
+  return dp.reduce((acc, cur) => {
+    const sum = cur.reduce((acc2, cur2) => acc2 + cur2, 0);
+    return sum + acc;
+  }, -1);
 }
 
 console.log(solution(10));
@@ -52,6 +59,3 @@ console.log(solution(10));
 // 1) 입력 : 0 -> 출력 : 1
 // 2) 입력 : 1 -> 출력 : 10
 // 3) 입력 : 2 -> 출력 : 55
-
-
-[6];
