@@ -1,75 +1,82 @@
-const readline = require("readline");
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const input = [];
+let graph, visited, result;
 
-let N = null;
-let M = null;
-let start = null;
-let cnt = 0;
-let node = [];
-let checked = [];
-let result = [];
+const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
 
-function dfs(current) {
-  if (checked[current]) return;
-  else {
-    checked[current] = true;
-    result.push(current);
-
-    node[current].forEach(value => {
-      dfs(value);
+require("readline")
+  .createInterface(process.stdin, process.stdout)
+  .on("line", function (line) {
+    input.push(line.trim());
+  })
+  .on("close", function () {
+    const [N, M, V] = strToNumArr(input.shift());
+    graph = [...Array(N+1)].map(()=>[]);
+    visited = [...Array(N+1)].fill(false);
+    let v1, v2;
+    input.forEach((str)=>{
+      [v1, v2] = strToNumArr(str);
+      insertEdge(v1, v2);
+      insertEdge(v2, v1);
     });
-  }
-}
 
-function bfs(current) {
-  let q = [current];
-  while(q.length) {
-    const c = q.shift();
-    if (checked[c]) continue;
-    checked[c] = true;
-    result.push(c);
+    result=[];
+    dfs(V);
+    console.log(result.join(" "));
 
-    node[c].forEach(value => {
-      q.push(value);
-    });
-  }
-}
+    visited.fill(false);
+    result=[];
+    bfs(V);
+    console.log(result.join(" "));
+  });
 
-rl.on("line", function(line) {
-  if (!N && !M && !start) {
-    const [_N, _M, _start] = line.split(' ');
-    N = +_N;
-    M = +_M;
-    start = +_start;
-  } else {
-    node.push(line.split(' '));
-    cnt += 1;
-  }
 
-  if (cnt === M) {
-    rl.close();
-  }
-}).on("close", function() {
-  node = node.reduce((acc, cur) => {
-    const [start, end] = cur;
-    return {
-      ...acc,
-      [+start]: acc[start] ? new Set([...acc[start].add(+end)].sort()) : new Set([+end]),
-      [+end]: acc[end] ? new Set([...acc[end].add(+start)].sort()) : new Set([+start]),
+const insertEdge = (vFront, vBack) => {
+  let index;
+  for(index=0; index<graph[vFront].length; index++){
+    if(graph[vFront][index]<vBack){
+      continue;
     }
-  }, {});
 
-  checked = Array.from(Array(N + 1), () => false);
-  result = [];
-  dfs(start);
-  console.log(result.join(' '));
+    if(graph[vFront][index]===vBack){
+      index=null;
+    }
+    break;
+  }
 
-  checked = Array.from(Array(N + 1), () => false);
-  result = [];
-  bfs(start);
-  console.log(result.join(' '));
-  process.exit(0);
-});
+  if(index!==null){
+    graph[vFront].splice(index, 0, vBack);
+  }
+};
+
+const dfs = (v) => {
+  if(visited[v]){
+    return;
+  }
+
+  visited[v]=true;
+  result.push(v);
+  graph[v].forEach((vertex)=>{
+    if(!visited[vertex]){
+      dfs(vertex);
+    }
+  });
+};
+
+const bfs = (vStart) => {
+  const willVisit = [vStart];
+  let v;
+  while(willVisit.length!==0){
+    v=willVisit.shift();
+    if(visited[v]){
+      continue;
+    }
+
+    visited[v]=true;
+    result.push(v);
+    graph[v].forEach((vertex)=>{
+      if(!visited[vertex]){
+        willVisit.push(vertex);
+      }
+    });
+  }
+}
